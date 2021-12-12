@@ -1,25 +1,30 @@
 # Frontend-Developer-Project-Case-Converter
 
 Description
-Let's work with the text in the textarea element. In this stage, we will add some handlers for buttons.
-
-Your application should be able to convert a text into the upper case, lower case, proper case, and sentence case.
-
-The upper case is the case when each letter is in the upper case. For example, THIS IS THE UPPER CASE TEXT.
-The lower case is the case when each letter is in the lower case. For example, this is the lower case text.
-The proper case is the case when each word starts with the upper case, and the rest of the word is in the lower. For example, This Is The Proper Case Text.
-The sentence case is the case when each sentence starts with an upper case letter, and the rest of the sentence is in the lower case. In example, This is the sentence case. Only the first word of the sentence starts with an upper case letter.
-This stage requires knowledge of various string methods. You can take a look at the W3 Schools Tutorial. Consider using the join() method.
+You can convert the text into different cases, excellent! Now let's add the ability to save the changed text as a .txt file!
 
 Objectives
-Your web page should contain all elements from the previous stage.
+Add one more button to the page. Assign the save-text-file id to it. Add another event handler for the button.
 
-Add the following event handlers to the buttons:
+When the button is clicked, you should get the text in the textarea element and generate the text.txt file. The resulting file should contain the text from the textarea element.
 
-If the upper-case button is pressed, convert the text in textarea to the upper case;
-If the lower-case button is pressed, convert the text in textarea to the lower case;
-If the proper-case button is pressed, convert the text in textarea to the proper case;
-If the sentence-case button is pressed, convert the text in textarea to the sentence case.
+Here is a code snippet that shows how you can implement it:
+
+function download(filename, text) {
+  let element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+// Start file download.
+download("hello.txt","This is the content of my file :)");
 Example
 Example 1: an example of your app
-![image](https://user-images.githubusercontent.com/94325541/145722490-b301c816-f11e-471c-9c4c-61081c8da3e2.png)
+![image](https://user-images.githubusercontent.com/94325541/145732373-bd8b3e26-73e9-4897-9bad-99ec5a4242d4.png)
