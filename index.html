@@ -1,17 +1,63 @@
 <!doctype html>
-<!-- Stage 1/3: The converter -->
+<!-- Stage 2/3: Upper or lower -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
 <body>
-    <div class="title">Case Converter</div>
-    <div><textarea></textarea></div>
-    <button id="upper-case">Upper Case</button>
-    <button id="lower-case">Lower Case</button>
-    <button id="proper-case">Proper Case</button>
-    <button id="sentence-case">Sentence Case</button>
+<div class="title">Case Converter</div>
+<div><textarea></textarea></div>
+<button id="upper-case">Upper Case</button>
+<button id="lower-case">Lower Case</button>
+<button id="proper-case">Proper Case</button>
+<button id="sentence-case">Sentence Case</button>
+<script>
+
+    let elementUpperCase = document.getElementById("upper-case");
+    let elementLowerCase = document.querySelector("#lower-case");
+    let elementProperCase = document.getElementById("proper-case");
+    let elementSentenceCase = document.getElementById("sentence-case");
+
+
+    elementUpperCase.addEventListener("click", function() {
+        let text = document.querySelector("textarea").value;
+        updateTextAreaCase(text.toUpperCase());
+    });
+
+    elementLowerCase.addEventListener("click", function() {
+        let text = document.querySelector("textarea").value;
+        updateTextAreaCase(text.toLowerCase());
+    });
+
+    elementProperCase.addEventListener("click", function() {
+        let text = document.querySelector("textarea").value;
+        let words = text.split(" ");
+        let text2 = "";
+        words.forEach(function(val,index,array){
+            let word = array[index];
+            let tmp  = word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase();
+            text2 = text2 + tmp + " ";
+        });
+
+        updateTextAreaCase(text2.trim());
+    });
+
+    elementSentenceCase.addEventListener("click", function() {
+
+        let text = document.querySelector("textarea").value;
+        //text = "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s, When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book."
+        text = text.toLowerCase().replace(/^(.)|\.(\s)*(.)/g,
+             function ($1) {return $1.toUpperCase();});
+
+        updateTextAreaCase(text);
+    });
+
+    function updateTextAreaCase(text) {
+        //alert(text)
+        document.querySelector('textarea').value = text;
+    }
+</script>
 
 </body>
 </html>
